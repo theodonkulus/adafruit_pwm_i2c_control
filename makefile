@@ -1,3 +1,4 @@
+PROGNAME=i2c-control
 IDIR =../include
 CC=g++
 CFLAGS=-I$(IDIR)
@@ -18,10 +19,10 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 $(ODIR)/%.o: $(SDIR)/%.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-i2c-control: $(OBJ)
-	g++ -o $@ $^ $(CFLAGS) $(LIBS)
+$(ODIR)/$(PROGNAME): $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
+	rm -f $(ODIR)/* *~ core $(INCDIR)/*~ 
